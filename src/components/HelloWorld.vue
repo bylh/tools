@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <div class="ot-letter-top">
       <span data-letter="3">3</span>
     </div>
@@ -124,94 +123,68 @@
 
 <script lang="ts">
 import {
-  defineComponent,
-  ref,
-  reactive,
-  onMounted,
-  onUpdated,
-  onUnmounted,
-} from "vue";
+    defineComponent,
+    ref,
+    reactive,
+    onMounted,
+    onUpdated,
+    onUnmounted,
+} from 'vue'
 export default defineComponent({
-  name: "hello world",
-  props: {
-    msg: String,
-  },
-  setup(props) {
+    name: 'hello world',
+    props: {
+        msg: String,
+    },
+    setup(props) {
     // interface Data {
     //   count: number;
     //   object: object;
     // }
-    const count = ref(0);
-    const object = reactive({ foo: "bar" });
-    const increase = (): void => {
-      count.value++;
-    };
-    const list: any = [
-      {
-        name: "foo",
-      },
-      {
-        name: "bar",
-      },
-      {
-        name: "coo",
-      },
-    ];
-    function test(x: number): string {
-      console.log(x);
-      return props.toString();
-    }
-    test(1);
-    // test('number');
-    // 生命周期
-    onMounted(() => {
-      console.log("mounted vue3 typescript");
-    });
-    onUpdated(() => {
-      console.log("updated vue3 typescript");
-    });
-    onUnmounted(() => {
-      console.log("onUnmounted vue3 typescript");
-    });
-    // 暴露给模板
-    return {
-      count,
-      increase,
-      object,
-      list,
-    };
+        const count = ref(0)
+        const object = reactive({ foo: 'bar' })
+        const increase = (): void => {
+            count.value++
+        }
+        const list: any = [
+            {
+                name: 'foo',
+            },
+            {
+                name: 'bar',
+            },
+            {
+                name: 'coo',
+            },
+        ]
+        function test(x: number): string {
+            console.log(x)
+            return props.toString()
+        }
+        test(1)
+        // test('number');
+        // 生命周期
+        onMounted(() => {
+            console.log('mounted vue3 typescript')
+        })
+        onUpdated(() => {
+            console.log('updated vue3 typescript')
+        })
+        onUnmounted(() => {
+            console.log('onUnmounted vue3 typescript')
+        })
+        // 暴露给模板
+        return {
+            count,
+            increase,
+            object,
+            list,
+        }
     // return () => h('div', [count.value, object.foo])
-  },
-});
+    },
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.hello {
-  text-align: center;
-  margin: 60px 0;
-}
-.ot-letter-top {
-  margin-top: -10em;
-  span {
-    font-size: 6em;
-    font-weight: bold;
-    text-shadow: 0 0 1px #999, 1px 1px 2px #888, 2px 2px 2px #777,
-      3px 3px 2px #666, 4px 4px 2px #555, 5px 5px 2px #333;
-  }
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
