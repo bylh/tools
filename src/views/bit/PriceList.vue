@@ -1,18 +1,18 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="price-list">
+      <input v-model="state.name" ref="inputNameEl"/>
   </div>
 </template>
 
 <script lang="ts">
 import {
     defineComponent,
-    ref,
     reactive,
     onMounted,
     onUpdated,
     onUnmounted,
 } from 'vue'
+import { useAutofocus } from '../../hooks/useAutoFocus'
 export default defineComponent({
     name: 'hello world',
     props: {
@@ -20,12 +20,10 @@ export default defineComponent({
     },
     setup(props) {
         console.log(props.msg)
-        const count = ref(0)
-        const object = reactive({ foo: 'bar' })
-        const increase = (): void => {
-            count.value++
-        }
-      
+        const state = reactive({ 
+            name: 'nas',
+        })
+        const inputNameEl = useAutofocus()
         onMounted(() => {
             console.log('mounted vue3 typescript')
         })
@@ -37,15 +35,15 @@ export default defineComponent({
         })
         // 暴露给模板
         return {
-            count,
-            increase,
-            object,
+            state,
+            inputNameEl
         }
     },
 })
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+.price-list {
+    padding: 10px;
+}
 </style>
