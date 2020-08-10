@@ -1,9 +1,19 @@
 <template>
-    <div class="price-list">
-        <div class="container is-fluid">
-            <input v-model="state.name" ref="inputNameEl" />
-            <input-search v-model="checked"></input-search>
-            <button @click="test">组件外</button>
+    <div class="field">
+        <div class="control is-loading">
+            <input
+                class="input"
+                type="text"
+                placeholder="Normal loading input"
+                ref="inputNameEl"
+            />
+            <input
+                id="test"
+                type="checkbox"
+                v-bind:checked="$props.checked"
+                v-on:change="change"
+            />
+            <button @click="test">组件中</button>
         </div>
     </div>
 </template>
@@ -12,29 +22,26 @@
 import {
     defineComponent,
     reactive,
-    ref,
     onMounted,
     onUpdated,
     onUnmounted,
 } from 'vue'
 import { useAutofocus } from '@/hooks/useAutoFocus'
-import InputSearch from '@/components/custom/input/InputSearch.vue'
+
 export default defineComponent({
     name: 'hello world',
-    components: {
-        InputSearch
+    model: {
+        prop: 'checked',
+        event: 'change',
     },
     props: {
-        msg: String,
+        checked: Boolean,
     },
-    setup(props) {
-        console.log(props.msg)
+    setup(props, ctx) {
+        console.log(props.checked)
         const state = reactive({
             name: 'nas',
-            checked: true,
         })
-        const checked = ref(true)
-
         const inputNameEl = useAutofocus()
         onMounted(() => {
             console.log('mounted vue3 typescript')
@@ -45,15 +52,19 @@ export default defineComponent({
         onUnmounted(() => {
             console.log('onUnmounted vue3 typescript')
         })
+        const change = ($event: any) => {
+            console.log('change触发', $event,$event.target.checked)
+            ctx.emit('input', $event.target.checked)
+        }
         const test = () => {
-            console.log('test', state.checked)
+            console.log('test', props.checked)
         }
         // 暴露给模板
         return {
             state,
             inputNameEl,
-            test,
-            checked
+            change,
+            test
         }
     },
 })
