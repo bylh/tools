@@ -3,7 +3,6 @@
         <div class="container is-fluid">
             <input v-model="state.name" ref="inputNameEl" />
             <input-search v-model="checked"></input-search>
-            <button @click="test">组件外</button>
         </div>
     </div>
 </template>
@@ -45,14 +44,10 @@ export default defineComponent({
         onUnmounted(() => {
             console.log('onUnmounted vue3 typescript')
         })
-        const test = () => {
-            console.log('test', state.checked)
-        }
         // 暴露给模板
         return {
             state,
             inputNameEl,
-            test,
             checked
         }
     },

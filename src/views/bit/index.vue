@@ -1,17 +1,10 @@
 <template>
-    <div class="home">
-        <layout>
-            <template #header>头部</template>
-            <template #content>
-                <router-view />
-            </template>
-            <template #footer>底部</template>
-        </layout>
+    <div class="bit">
+        比特币交易中心
     </div>
 </template>
 
-<script>
-// @ is an alias to /src
+<script lang="ts">
 import {
     defineComponent,
     reactive,
@@ -19,22 +12,18 @@ import {
     onUpdated,
     onUnmounted,
 } from 'vue'
-import Layout from '@/components/custom/layout/Layout'
 export default defineComponent({
-    name: 'Home',
+    name: 'hello world',
     components: {
-        Layout,
-    },
-    model: {
-        prop: 'checked',
-        event: 'change',
     },
     props: {
-        checked: Boolean,
+        msg: String,
     },
-    setup() {
+    setup(props) {
+        console.log(props.msg)
         const state = reactive({
-            name: 'home',
+            name: 'nas',
+            checked: true,
         })
         onMounted(() => {
             console.log('mounted vue3 typescript')
@@ -45,7 +34,6 @@ export default defineComponent({
         onUnmounted(() => {
             console.log('onUnmounted vue3 typescript')
         })
-
         // 暴露给模板
         return {
             state,
@@ -53,8 +41,10 @@ export default defineComponent({
     },
 })
 </script>
+
 <style scoped lang="scss">
-.home {
-    height: 100%;
+.bit {
+    background: yellow;
+    height: 1200px;
 }
 </style>

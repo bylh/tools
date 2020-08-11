@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import { store } from './store'
-import 'bulma/css/bulma.css'
+// import 'bulma/css/bulma.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
 createApp(App)
