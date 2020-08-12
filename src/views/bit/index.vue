@@ -1,6 +1,6 @@
 <template>
     <div class="bit">
-        比特币交易中心
+        <div class="animate__heartBeat"></div>
     </div>
 </template>
 
@@ -14,8 +14,7 @@ import {
 } from 'vue'
 export default defineComponent({
     name: 'hello world',
-    components: {
-    },
+    components: {},
     props: {
         msg: String,
     },
@@ -43,8 +42,9 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+$primary: blue;
 .bit {
-    background: yellow;
+    background: $primary;
     height: 1200px;
 }
 </style>
