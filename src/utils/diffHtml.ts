@@ -112,7 +112,7 @@ function diffHtml(left, right, config = {}, callback) {
         return str;
     };
     left = recNodes(leftFrag, 0, leftNodeMap);
-    right = recNodes(rightFrag, 0, rightNodeMap, true);
+    right = recNodes(rightFrag, 0, rightNodeMap);
     let _left = '', _right = '';
     let diff = [];
     if (_config.diffType === '英文') {
@@ -232,11 +232,12 @@ function diffHtml(left, right, config = {}, callback) {
 
         }
     });
-    _left = [...leftFrag.childNodes].map(item => item.outerHTML || item.data).join('');
-    _right = [...rightFrag.childNodes].map(item => item.outerHTML || item.data).join('');
+    _left = [...leftFrag.childNodes].map((item: any) => item.outerHTML || item.data).join('');
+    _right = [...rightFrag.childNodes].map((item: any) => item.outerHTML || item.data).join('');
 
     // 对比完后回调
     callback && callback({left: _left, right: _right});
+    
     // 返回对比后的结果，left, right
     return {
         left: _left || _config.emptyTip,
