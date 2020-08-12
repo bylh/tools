@@ -1,6 +1,6 @@
 <template>
     <div class="bit">
-        <div class="animate__heartBeat"></div>
+        <div class="animate__heartBeat">测试</div>
     </div>
 </template>
 
@@ -42,7 +42,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-$primary: blue;
 .bit {
     background: $primary;
     height: 1200px;

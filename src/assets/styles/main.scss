@@ -1,8 +1,10 @@
+
 @import 'bulma/css/bulma';
 @import "bulma/bulma";
-// @import '@fortawesome/fontawesome-free/css/all';
-// @import 'animate';
+// fontawesome不能在此引入，由于其内部的webfonts路径有问题，所以在main.ts中引入
+// @import '@fortawesome/fontawesome-free/css/all.min';
+@import 'animate.css/animate';
 
-
+@import "var";
+// 注意reset一定要放在最后
 @import "reset";
-@import "var"

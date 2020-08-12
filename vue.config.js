@@ -36,6 +36,16 @@ module.exports = {
     //         },
     //     },
     // },
+    css: {
+        loaderOptions: {
+            scss: {
+                prependData: `
+              @import "~@/assets/styles/main.scss";
+            //   @import "~@/scss/_mixins.scss";
+            `
+            }
+        }
+    },
     assetsDir: '@/assets/',
     configureWebpack: {
         // https://juejin.im/post/5d5652446fb9a06afd66004b

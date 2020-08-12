@@ -1,1 +1,8 @@
-$primary: hsl(171, 100%, 41%);
+/* bulma重置 */
+// $primary: blue;
+
+/* 修改默认行为 */
+html,body,#app {
+    height: 100%;
+    margin: 0;
+}
