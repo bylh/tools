@@ -7,8 +7,17 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'Home',
         component: Home,
-        redirect: '/bit',
+        redirect: '/download',
         children: [
+            {
+                path: '/download',
+                name: 'Download',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                import(/* webpackChunkName: "about" */ '../views/download/index.vue')
+            },
             {
                 path: '/bit',
                 name: 'Bit',
