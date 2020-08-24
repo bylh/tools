@@ -22,6 +22,7 @@ import {
     onUpdated,
     onUnmounted,
 } from 'vue'
+import axios from '@/services/axios'
 export default defineComponent({
     name: 'hello world',
     components: {},
@@ -34,8 +35,12 @@ export default defineComponent({
             name: 'nas',
             checked: true,
         })
-        onMounted(() => {
+        onMounted(async () => {
             console.log('mounted vue3 typescript')
+            const data = await axios.request({
+                url: '/news/types',
+            })
+            console.log(data)
         })
         onUpdated(() => {
             console.log('updated vue3 typescript')

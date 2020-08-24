@@ -54,7 +54,7 @@ module.exports = {
         externals: {},
         plugins: [
             new webpack.ProvidePlugin({
-                feConfig: path.resolve('.', `./src/feConfig/${process.env.VUE_APP_FE_MODE}.js`)
+                feConfig: path.resolve('.', `./src/feConfig/${process.env.VUE_APP_FE_MODE}.ts`)
             })
         ]
     },
