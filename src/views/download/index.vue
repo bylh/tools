@@ -1,6 +1,7 @@
 <template>
     <div class="download">
         <button @click="html2word">html2word</button>
+        <video-player></video-player>
     </div>
 </template>
 
@@ -14,9 +15,12 @@ import {
 } from 'vue'
 import axios from '@/services/axios'
 import downloadBlob from '@/utils/download.ts'
+import VideoPlayer from '@/components/base/VideoPlayer.vue'
 export default defineComponent({
     name: 'hello world',
-    components: {},
+    components: {
+        VideoPlayer
+    },
     props: {
         msg: String,
     },
@@ -28,10 +32,10 @@ export default defineComponent({
         })
         onMounted(async () => {
             console.log('mounted vue3 typescript')
-            const data = await axios.request({
-                url: '/news/types',
-            })
-            console.log(data)
+            // const data = await axios.request({
+            //     url: '/news/types',
+            // })
+            // console.log(data)
         })
         onUpdated(() => {
             console.log('updated vue3 typescript')
