@@ -99,6 +99,7 @@ export default defineComponent({
                     })
                 }
             )
+            console.log('palrer', player)
         })
         onUpdated(() => {
             console.log('updated vue3 typescript')
