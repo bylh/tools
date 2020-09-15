@@ -19,7 +19,7 @@ import VideoPlayer from '@/components/base/VideoPlayer.vue'
 export default defineComponent({
     name: 'hello world',
     components: {
-        VideoPlayer
+        VideoPlayer,
     },
     props: {
         msg: String,
@@ -48,25 +48,24 @@ export default defineComponent({
                 url: '/download/html2word',
                 method: 'post',
                 data: {
-                    html: '<div>test</div>'
+                    html: '<div>test</div>',
                 },
-                responseType: 'blob'
+                responseType: 'blob',
             })
             console.log('data', data)
             downloadBlob({
                 file: data.data,
-                name: 'test.docx'
+                name: 'test.docx',
             })
         }
         // 暴露给模板
         return {
             state,
-            html2word
+            html2word,
         }
     },
 })
 </script>
 
 <style scoped lang="scss">
-
 </style>

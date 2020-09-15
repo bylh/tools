@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'Home',
         component: Home,
-        redirect: '/video',
+        redirect: '/test',
         children: [
             {
                 path: '/download',
@@ -16,13 +16,13 @@ const routes: Array<RouteRecordRaw> = [
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
-                import(/* webpackChunkName: "about" */ '../views/download/index.vue')
+                    import(/* webpackChunkName: "about" */ '../views/download/index.vue')
             },
             {
                 path: '/video',
                 name: 'Video',
                 component: () =>
-                import('../views/video/index.vue')
+                    import('../views/video/index.vue')
             },
             {
                 path: '/bit',
@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
-                import(/* webpackChunkName: "about" */ '../views/bit/index.vue')
+                    import(/* webpackChunkName: "about" */ '../views/bit/index.vue')
             },
         ]
     },
@@ -42,7 +42,13 @@ const routes: Array<RouteRecordRaw> = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue')
+            import(/* webpackChunkName: "about" */ '../views/About.vue')
+    },
+    {
+        path: '/test',
+        name: 'Test',
+        component: () =>
+            import('../views/Test.vue')
     }
 ]
 

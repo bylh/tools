@@ -70,17 +70,17 @@ function diffHtml(left, right, config = {}, callback) {
 
     /* ---------------------------------- 开始处理数学公式 ------------------------------- */
     // 将文本中的数学公式用template模板来表示，这样可以保证节点占位，但是不展示
-    left = left.replace(/\${[^\$]*}\$/g, function (a) {
+    left = left.replace(/\${[^$]*}\$/g, function (a) {
         return `<template id="kb-math">${a}</template>`
     })
-    right = right.replace(/\${[^\$]*}\$/g, function (a) {
+    right = right.replace(/\${[^$]*}\$/g, function (a) {
         return `<template id="kb-math">${a}</template>`
     })
     /* ---------------------------------- 结束处理数学公式 ------------------------------- */
 
     // 根据左右html创建dom树
-    const leftFrag = document.createRange().createContextualFragment(left)
-    const rightFrag = document.createRange().createContextualFragment(right)
+    const leftFrag = document.createRange().createContextualFragment(`<div>${left}</div>`)
+    const rightFrag = document.createRange().createContextualFragment(`<div>${right}</div>`)
     // map结构保存左右dom树的遍历节点，方便后续处理
     const leftNodeMap = new Map() // 保存左侧必要的节点
     const rightNodeMap = new Map() // 保存右侧必要的节点
@@ -98,7 +98,7 @@ function diffHtml(left, right, config = {}, callback) {
                 text,
                 type: item.nodeName,
                 node: item, // 保存原始节点
-                colorText: item.nodeName === '#text' ? '' : null
+                colorText: item.nodeName === '#text' ? document.createRange().createContextualFragment('') : null
             })
             startIndex++
             if (item.childNodes.length === 0) {
@@ -112,7 +112,7 @@ function diffHtml(left, right, config = {}, callback) {
         return str
     }
     left = recNodes(leftFrag, 0, leftNodeMap)
-    right = recNodes(rightFrag, 0, rightNodeMap)
+    right = recNodes(rightFrag, 0, rightNodeMap, true)
     let _left = '', _right = ''
     let diff = []
     if (_config.diffType === '英文') {
@@ -132,7 +132,15 @@ function diffHtml(left, right, config = {}, callback) {
             }
             const renderLen = Math.min(arr[index].text.length - textIndex, len) // 本次循环渲染的长度
             const text = arr[index].text.substr(textIndex, renderLen)
-            arr[index].colorText += clear ? `<span style="color: ${color};">${text}</span>` : text
+            let spanDom
+            if (clear) {
+                spanDom = document.createRange().createContextualFragment(`<span style="color: ${color};"></span>`)
+                spanDom.childNodes[0].textContent = text
+            } else {
+                spanDom = document.createRange().createContextualFragment('')
+                spanDom.textContent = text
+            }
+            arr[index].colorText.append(spanDom)
             len = len - renderLen // 剩余的长度，
             if (len > 0) {
                 index++
@@ -168,11 +176,11 @@ function diffHtml(left, right, config = {}, callback) {
     })
     rightTextNodes.forEach((item) => {
         const colorText = item.colorText
-        item.node.parentNode.replaceChild(document.createRange().createContextualFragment(colorText), item.node)
+        item.node.parentNode.replaceChild(colorText, item.node)
     })
     leftTextNodes.forEach((item) => {
         const colorText = item.colorText
-        item.node.parentNode.replaceChild(document.createRange().createContextualFragment(colorText), item.node)
+        item.node.parentNode.replaceChild(colorText, item.node)
     })
     // 找出左右的图片节点进行对比
     const leftImgNodes = [...leftNodeMap.values()].filter((item => item.type === 'IMG'))
@@ -232,17 +240,16 @@ function diffHtml(left, right, config = {}, callback) {
 
         }
     })
-    _left = [...leftFrag.childNodes].map((item: any) => item.outerHTML || item.data).join('')
-    _right = [...rightFrag.childNodes].map((item: any) => item.outerHTML || item.data).join('')
-
+    _left = [...leftFrag.childNodes].map(item => item.innerHTML || item.data).join('')
+    _right = [...rightFrag.childNodes].map(item => item.innerHTML || item.data).join('')
     // 对比完后回调
     callback && callback({left: _left, right: _right})
-    
     // 返回对比后的结果，left, right
     return {
         left: _left || _config.emptyTip,
         right: _right || _config.emptyTip
     }
 }
-
+window.diffHtml = diffHtml
+window.diff = Diff
 export default diffHtml
