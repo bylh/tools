@@ -39,7 +39,7 @@ export default defineComponent({
                 // preload: 'auto',
                 // src: 'vjs.zencdn.net/v/oceans.mp4',
                 playbackRates: [0.5, 1, 1.5, 2],
-                poster: '//vjs.zencdn.net/v/oceans.png', // 视频封面图地址
+                poster: '//', // 视频封面图地址
                 controls: true, // 是否显示控制条
                 preload: 'auto',
                 autoplay: false,
@@ -80,7 +80,7 @@ export default defineComponent({
                     {
                         src: 'http://yx-kbs-ks3.haofenshu.com/videos/258053ec28bbe745128b2c35597e9aef.mp4',
                         type: 'video/mp4',
-                        poster: '//vjs.zencdn.net/v/oceans.png',
+                        poster: '//',
                     },
                 ],
             }

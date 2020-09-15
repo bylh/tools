@@ -7,8 +7,11 @@ import { store } from './store'
 // import 'bulma/bulma.sass'
 import '@fortawesome/fontawesome-free/css/all.css'
 // import 'animate.css'
-
+import { Button } from 'ant-design-vue'
 createApp(App)
+    // ant design
+    .use(Button)
+    
     .use(router)
     .use(store)
     .mount('#app')

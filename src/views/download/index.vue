@@ -1,6 +1,6 @@
 <template>
     <div class="download">
-        <button @click="html2word">html2word</button>
+        <a-button @click="html2word">html2word</a-button>
         <video-player></video-player>
     </div>
 </template>
