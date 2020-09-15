@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'Home',
         component: Home,
-        redirect: '/download',
+        redirect: '/video',
         children: [
             {
                 path: '/download',
@@ -17,6 +17,12 @@ const routes: Array<RouteRecordRaw> = [
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                 import(/* webpackChunkName: "about" */ '../views/download/index.vue')
+            },
+            {
+                path: '/video',
+                name: 'Video',
+                component: () =>
+                import('../views/video/index.vue')
             },
             {
                 path: '/bit',

@@ -1,6 +1,7 @@
 <template>
-    <div class="download">
-        <a-button @click="html2word">html2word</a-button>
+    <div class="video">
+        <a-button type="primary" @click="html2word">html2word</a-button>
+        <video-player></video-player>
     </div>
 </template>
 
@@ -14,9 +15,11 @@ import {
 } from 'vue'
 import axios from '@/services/axios'
 import downloadBlob from '@/utils/download.ts'
+import VideoPlayer from '@/components/base/VideoPlayer.vue'
 export default defineComponent({
     name: 'hello world',
     components: {
+        VideoPlayer
     },
     props: {
         msg: String,
