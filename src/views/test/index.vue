@@ -1,19 +1,12 @@
 <template>
     <div class="test">
-        <a-button @click="test">测试</a-button>
-        <a-row>
-            <a-col :span="12">
-                <div v-html="state.diff.left"></div>
-            </a-col>
-            <a-col :span="12">
-                <div v-html="state.diff.right"></div>
-            </a-col>
-        </a-row>
+        <a-button @click="test">测试props</a-button>
+
+       <test-diff :msg="state.msg"></test-diff>
     </div>
 </template>
 
 <script lang="ts">
-import diffHtml from '@/utils/diffHtml'
 import {
     defineComponent,
     reactive,
@@ -22,29 +15,21 @@ import {
     onUnmounted,
 } from 'vue'
 // import axios from '@/services/axios'
+import TestDiff from '@/views/test/components/TestDiff.vue'
 export default defineComponent({
     name: 'hello world',
-    components: {},
-    props: {
-        msg: String,
+    components: {
+        TestDiff
     },
-    setup(props) {
-        console.log(props.msg)
+    setup() {
         const state = reactive({
-            left: '<span>123</span>',
-            right: '1234',
-            diff: {
-                left: '',
-                right: ''
-            },
+            msg: 'test msg'
         })
         onMounted(async () => {
             // const data = await axios.request({
             //     url: '/news/types',
             // })
             // console.log(data)
-            state.diff = diffHtml(state.left, state.right, {}, () => {console.log('对比结束')})
-            console.log('diff', state.diff)
         })
         onUpdated(() => {
             console.log('updated vue3 typescript')
@@ -52,8 +37,8 @@ export default defineComponent({
         onUnmounted(() => {
             console.log('onUnmounted vue3 typescript')
         })
-        const test = async () => {
-            console.log('test')
+        const test = () => {
+            state.msg += '1'
         }
         // 暴露给模板
         return {
