@@ -1,5 +1,8 @@
 <template>
     <div class="test-diff">
+        <div>依赖注入的值</div>
+       <div>{{ testTheme }}</div>
+       <div>{{ testLanguage }}</div>
         <a-button @click="test">{{ props.msg }}</a-button>
         <a-row>
             <a-col :span="12">
@@ -20,6 +23,7 @@ import {
     onMounted,
     onUpdated,
     onUnmounted,
+    inject
 } from 'vue'
 // import axios from '@/services/axios'
 export default defineComponent({
@@ -30,6 +34,8 @@ export default defineComponent({
     },
     setup(props) {
         console.log(props.msg)
+        const testTheme = inject('theme', '')
+        const testLanguage = inject('language', '')
         const state = reactive({
             left: '<span>123</span>',
             right: '1234',
@@ -57,6 +63,8 @@ export default defineComponent({
         }
         // 暴露给模板
         return {
+            testTheme,
+            testLanguage,
             props,
             state,
             test,
