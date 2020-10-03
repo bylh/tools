@@ -112,7 +112,7 @@ function diffHtml(left, right, config = {}, callback) {
         return str
     }
     left = recNodes(leftFrag, 0, leftNodeMap)
-    right = recNodes(rightFrag, 0, rightNodeMap, true)
+    right = recNodes(rightFrag, 0, rightNodeMap)
     let _left = '', _right = ''
     let diff = []
     if (_config.diffType === '英文') {
@@ -240,8 +240,8 @@ function diffHtml(left, right, config = {}, callback) {
 
         }
     })
-    _left = [...leftFrag.childNodes].map(item => item.innerHTML || item.data).join('')
-    _right = [...rightFrag.childNodes].map(item => item.innerHTML || item.data).join('')
+    _left = [...leftFrag.childNodes].map(item => (item as any).innerHTML || (item as any).data).join('')
+    _right = [...rightFrag.childNodes].map(item => (item as any).innerHTML || (item as any).data).join('')
     // 对比完后回调
     callback && callback({left: _left, right: _right})
     // 返回对比后的结果，left, right
@@ -250,6 +250,6 @@ function diffHtml(left, right, config = {}, callback) {
         right: _right || _config.emptyTip
     }
 }
-window.diffHtml = diffHtml
-window.diff = Diff
+// (window as any).diffHtml = diffHtml
+// (window as any).diff = Diff
 export default diffHtml
