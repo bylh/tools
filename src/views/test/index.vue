@@ -1,5 +1,15 @@
 <template>
     <div class="test">
+        <a-page-header
+            style="border: 1px solid rgb(235, 237, 240)"
+            title="Title"
+            sub-title="This is a subtitle"
+            @back="goBack"
+        >
+            <template v-slot:extra>
+                <a-button type="primary" @click="goHome">主页</a-button>
+            </template>
+        </a-page-header>
         <a-button @click="test">测试</a-button>
         <test-upload></test-upload>
         <test-diff :msg="state.msg"></test-diff>
@@ -19,11 +29,12 @@ import {
 // import axios from '@/services/axios'
 import TestDiff from '@/views/test/components/TestDiff.vue'
 import TestUpload from '@/views/test/components/TestUpload.vue'
+import router from '../../router/index'
 export default defineComponent({
     name: 'hello world',
     components: {
         TestDiff,
-        TestUpload
+        TestUpload,
     },
     setup() {
         const state = reactive({
@@ -49,10 +60,18 @@ export default defineComponent({
             state.msg += '1'
             languageRef.value += '2'
         }
+        const goHome = () => {
+            router.push('/about')
+        }
+        const goBack = () => {
+            router.go(-1)
+        }
         // 暴露给模板
         return {
             state,
             test,
+            goHome,
+            goBack
         }
     },
 })

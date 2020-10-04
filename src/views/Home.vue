@@ -2,122 +2,55 @@
     <div class="home">
         <layout>
             <template #header>
-                <nav class="navbar is-transparent">
-                    <div class="navbar-brand">
-                        <a class="navbar-item" href="https://bulma.io">
-                            <img
-                                src="https://bulma.io/images/bulma-logo.png"
-                                alt="Bulma: a modern CSS framework based on Flexbox"
-                                width="112"
-                                height="28"
-                            />
-                        </a>
-                        <div
-                            class="navbar-burger burger"
-                            data-target="navbarExampleTransparentExample"
+                <a-menu
+                    v-model:selectedKeys="state.current"
+                    mode="horizontal"
+                    @select="select"
+                >
+                    <a-sub-menu>
+                        <template v-slot:title>
+                            <span class="submenu-title-wrapper">
+                                <setting-outlined />
+                                home
+                            </span>
+                        </template>
+                        <a-menu-item-group title="investment">
+                            <a-menu-item key="bit"> bit </a-menu-item>
+                        </a-menu-item-group>
+                        <a-menu-item-group title="learning">
+                            <a-menu-item key="download">
+                                download
+                            </a-menu-item>
+                            <a-menu-item key="video">
+                                video
+                            </a-menu-item>
+                        </a-menu-item-group>
+                    </a-sub-menu>
+
+                    <a-menu-item key="test">
+                        <mail-outlined />test
+                    </a-menu-item>
+                    <a-menu-item key="about" disabled>
+                        <appstore-outlined />about
+                    </a-menu-item>
+                    <!-- <a-menu-item key="alipay">
+                        <a
+                            href="https://antdv.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-
-                    <div id="navbarExampleTransparentExample" class="navbar-menu">
-                        <div class="navbar-start">
-                            <a class="navbar-item" href="https://bulma.io/">Home</a>
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a
-                                    class="navbar-link"
-                                    href="https://bulma.io/documentation/overview/start/"
-                                >Docs</a>
-                                <div class="navbar-dropdown is-boxed">
-                                    <a
-                                        class="navbar-item"
-                                        href="https://bulma.io/documentation/overview/start/"
-                                    >Overview</a>
-                                    <a
-                                        class="navbar-item"
-                                        href="https://bulma.io/documentation/overview/modifiers/"
-                                    >Modifiers</a>
-                                    <a
-                                        class="navbar-item"
-                                        href="https://bulma.io/documentation/columns/basics/"
-                                    >Columns</a>
-                                    <a
-                                        class="navbar-item"
-                                        href="https://bulma.io/documentation/layout/container/"
-                                    >Layout</a>
-                                    <a
-                                        class="navbar-item"
-                                        href="https://bulma.io/documentation/form/general/"
-                                    >Form</a>
-                                    <hr class="navbar-divider" />
-                                    <a
-                                        class="navbar-item"
-                                        href="https://bulma.io/documentation/elements/box/"
-                                    >Elements</a>
-                                    <a
-                                        class="navbar-item is-active"
-                                        href="https://bulma.io/documentation/components/breadcrumb/"
-                                    >Components</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="navbar-end">
-                            <div class="navbar-item">
-                                <div class="field is-grouped">
-                                    <p class="control">
-                                        <a
-                                            class="bd-tw-button button"
-                                            data-social-network="Twitter"
-                                            data-social-action="tweet"
-                                            data-social-target="https://bulma.io"
-                                            target="_blank"
-                                            href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=https://bulma.io&amp;via=jgthms"
-                                        >
-                                            <span class="icon">
-                                                <i class="fab fa-twitter"></i>
-                                            </span>
-                                            <span>Tweet</span>
-                                        </a>
-                                    </p>
-                                    <p class="control">
-                                        <a
-                                            class="button is-primary"
-                                            href="https://github.com/jgthms/bulma/releases/download/0.9.0/bulma-0.9.0.zip"
-                                        >
-                                            <span class="icon">
-                                                <i class="fas fa-download"></i>
-                                            </span>
-                                            <span>Download</span>
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+                            Navigation Four - Link
+                        </a>
+                    </a-menu-item> -->
+                </a-menu>
             </template>
             <template #content>
                 <router-view />
             </template>
             <template #footer>
-                <footer class="footer">
-                    <div class="content has-text-centered">
-                        <p>
-                            <strong>Bulma</strong> by
-                            <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-                            <a
-                                href="http://opensource.org/licenses/mit-license.php"
-                            >MIT</a>. The website content
-                            is licensed
-                            <a
-                                href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-                            >CC BY NC SA 4.0</a>.
-                        </p>
-                    </div>
-                </footer>
+                <a-layout-footer :style="{ textAlign: 'center' }">
+                    tools by @bylh
+                </a-layout-footer>
             </template>
         </layout>
     </div>
@@ -125,18 +58,21 @@
 
 <script>
 // @ is an alias to /src
-import {
-    defineComponent,
-    reactive,
-    onMounted,
-    onUpdated,
-    onUnmounted,
-} from 'vue'
+import { defineComponent, reactive } from 'vue'
 import Layout from '@/components/custom/layout/Layout'
+import {
+    MailOutlined,
+    AppstoreOutlined,
+    SettingOutlined,
+} from '@ant-design/icons-vue'
+import router from '../router/index'
 export default defineComponent({
     name: 'Home',
     components: {
         Layout,
+        MailOutlined,
+        AppstoreOutlined,
+        SettingOutlined,
     },
     model: {
         prop: 'checked',
@@ -147,27 +83,43 @@ export default defineComponent({
     },
     setup() {
         const state = reactive({
-            name: 'home',
+            current: ['download'],
+            routes: [{
+                name: 'download',
+                path: '/download'
+            }, {
+                name: 'video',
+                path: '/video'
+            }, {
+                name: 'bit',
+                path: '/bit'
+            }, {
+                name: 'test',
+                path: '/test'
+            }, {
+                name: 'about',
+                path: '/about'
+            }]
         })
-        onMounted(() => {
-            console.log('mounted vue3 typescript')
-        })
-        onUpdated(() => {
-            console.log('updated vue3 typescript')
-        })
-        onUnmounted(() => {
-            console.log('onUnmounted vue3 typescript')
-        })
+    
+        const select = (item) => {
+            console.log(item)
+            const routeItem = state.routes.find(route => route.name === item.key)
+            if (!routeItem) {
+                return
+            }
+            router.push(routeItem.path)
 
+        }
         // 暴露给模板
         return {
             state,
+            select,
         }
     },
 })
 </script>
 <style scoped lang="scss">
-
 .home {
     height: 100%;
 }

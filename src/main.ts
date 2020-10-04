@@ -7,13 +7,16 @@ import { store } from './store'
 // import 'bulma/bulma.sass'
 import '@fortawesome/fontawesome-free/css/all.css'
 // import 'animate.css'
-import { Button, Row, Col, Upload } from 'ant-design-vue'
+import { Button, Row, Col, Upload, Menu, Layout, PageHeader } from 'ant-design-vue'
 createApp(App)
     // ant design
     .use(Button)
     .use(Row)
     .use(Col)
     .use(Upload)
+    .use(Menu)
+    .use(Layout)
+    .use(PageHeader)
 
 
     .use(router)
