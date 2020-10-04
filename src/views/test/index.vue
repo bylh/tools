@@ -1,7 +1,8 @@
 <template>
     <div class="test">
         <a-button @click="test">测试</a-button>
-       <test-diff :msg="state.msg"></test-diff>
+        <test-upload></test-upload>
+        <test-diff :msg="state.msg"></test-diff>
     </div>
 </template>
 
@@ -13,18 +14,20 @@ import {
     onMounted,
     onUpdated,
     onUnmounted,
-    provide
+    provide,
 } from 'vue'
 // import axios from '@/services/axios'
 import TestDiff from '@/views/test/components/TestDiff.vue'
+import TestUpload from '@/views/test/components/TestUpload.vue'
 export default defineComponent({
     name: 'hello world',
     components: {
-        TestDiff
+        TestDiff,
+        TestUpload
     },
     setup() {
         const state = reactive({
-            msg: 'theme1'
+            msg: 'theme1',
         })
         const languageRef = ref('zh-cn')
         // 思考，点击测试按钮的时候为什么theme不会变，而language会是响应的  （解构丢失响应性）
