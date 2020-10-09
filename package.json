@@ -13,7 +13,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "deploy": "npm run build && scp -r dist root@34.84.129.188:/home/bylicx/pro/test/dist",
-    "deploy-dev": "npm run build-dev && scp -r dist root@34.84.129.188:/home/bylicx/pro/test/dist"
+    "deploy-dev": "npm run build-dev && scp -r dist root@34.84.129.188:/home/bylicx/pro/test/dist",
+    "test": "123"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
