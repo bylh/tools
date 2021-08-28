@@ -1,8 +1,9 @@
 FROM nginx
 RUN mkdir /usr/share/nginx/customer
 RUN mkdir /usr/share/nginx/customer/dist
-RUN rm -rf /etc/nginx/nginx.conf
-COPY ./nginx.conf /etc/nginx/nginx.conf
+# RUN rm -rf /etc/nginx/nginx.conf
+# COPY ./nginx.conf /etc/nginx/nginx.conf
+ADD ./bylh_tools.conf /etc/nginx/conf.d
 COPY ./dist /usr/share/nginx/customer/dist
 EXPOSE 8889
 #  本地
@@ -24,3 +25,6 @@ EXPOSE 8889
 ### 从其他服务器拉取
 ### docker pull bylh/bylh_tools:v1.0
 ### sudo docker run -d --name=tools1 -p 8889:8889 [imgageID] // 远程拉下来的直接用imageID
+
+
+### 同名的会直接更新
